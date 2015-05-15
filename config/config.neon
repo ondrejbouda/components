@@ -1,0 +1,25 @@
+resources:
+	
+	logFile: logs/log.txt
+	cacheDir: cache/
+
+
+services:
+	
+	config:
+		type: Bouda\Config\Config
+		class: Bouda\Config\ConfigNeon
+		args:
+			resource: config
+	
+	container:
+		class: Bouda\DI\Container
+		args:
+			service: config
+
+	cache:
+		type: Bouda\Cache\Cache
+		class: Bouda\Cache\CacheImpl
+		args:
+			resource: cacheDir
+

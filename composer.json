@@ -1,0 +1,15 @@
+{
+    "require": {
+        "php": ">=7.0.0-dev",
+    	"nette/neon": ">=2.3.0",
+        "tracy/tracy": ">=2.3.2"
+    },
+    "require-dev": {
+        "nette/tester": ">=1.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+        	"Bouda\\": "src/Bouda/"
+        }
+    }
+}

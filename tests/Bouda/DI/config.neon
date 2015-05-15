@@ -1,0 +1,49 @@
+resources:
+	
+	config: config.neon
+	resource: foo
+
+
+services:
+	
+	config:
+		type: Bouda\Config\Config
+		class: Bouda\Config\ConfigNeon
+		args:
+			resource: config
+	
+	container:
+		class: Bouda\DI\Container
+		args:
+			service: config
+
+	mock_service_unresolvable:
+		type: Bouda\DITests\MockService
+		class: Bouda\DITests\MockServiceImpl
+		args:
+			foo: bar
+
+	mock_service_circular1:
+		type: Bouda\DITests\MockService
+		class: Bouda\DITests\MockServiceImpl
+		args:
+			service: mock_service_circular2
+
+	mock_service_circular2:
+		type: Bouda\DITests\MockService
+		class: Bouda\DITests\MockServiceImpl
+		args:
+			service: mock_service_circular1
+
+	mock_service:
+		type: Bouda\DITests\MockService
+		class: Bouda\DITests\MockServiceImpl
+		args:
+			service: config
+			resource: resource
+
+
+	simple_factory:
+		class: Bouda\DI\SimpleFactory
+		args:
+			class: Bouda\DITests\MockClass
