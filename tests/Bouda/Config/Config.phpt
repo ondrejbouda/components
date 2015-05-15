@@ -4,8 +4,8 @@ namespace Bouda\ConfigTests;
 
 use Tester\Assert,
 	Tester\TestCase,
-	Bouda\Config\ConfigIni,
-	Bouda\Config\ConfigNeon,
+	Bouda\Config\IniConfig,
+	Bouda\Config\NeonConfig,
 	Nette\Neon\Decoder;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -20,8 +20,8 @@ class CacheTest extends TestCase
 
 	public function setUp()
 	{
-		$this->configIni = new ConfigIni('config.ini');
-		$this->configNeon = new ConfigNeon(new Decoder, 'config.neon');
+		$this->configIni = new IniConfig('config.ini');
+		$this->configNeon = new NeonConfig(new Decoder, 'config.neon');
 	}
 
 

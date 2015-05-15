@@ -6,7 +6,7 @@ use Tester\Assert,
 	Tester\TestCase,
 	Nette\Neon\Decoder,
 	Bouda\Config\Config,
-	Bouda\Config\ConfigNeon,
+	Bouda\Config\NeonConfig,
 	Bouda\DI\Container;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -34,7 +34,7 @@ class DITest extends TestCase
 
 	public function setUp()
 	{
-		$this->container = new Container(new ConfigNeon(new Decoder, 'config.neon'));
+		$this->container = new Container(new NeonConfig(new Decoder, 'config.neon'));
 	}
 
 

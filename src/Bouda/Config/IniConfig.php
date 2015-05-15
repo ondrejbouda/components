@@ -3,7 +3,7 @@
 namespace Bouda\Config;
 
 
-class ConfigIni extends ConfigBase
+class IniConfig extends BaseConfig
 {
 	function __construct(string $filename)
 	{

@@ -5,7 +5,7 @@ namespace Bouda\Config;
 use Nette\Neon\Decoder;
 
 
-class ConfigNeon extends ConfigBase
+class NeonConfig extends BaseConfig
 {
 	function __construct(Decoder $decoder, string $filename)
 	{

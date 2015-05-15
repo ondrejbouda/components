@@ -3,7 +3,7 @@
 namespace Bouda\Config;
 
 
-class ConfigBase implements Config
+class BaseConfig implements Config
 {
 	protected $config = array();
 
