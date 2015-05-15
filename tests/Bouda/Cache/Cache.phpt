@@ -5,7 +5,7 @@ namespace Bouda\CacheTests;
 use Tester\Assert,
 	Tester\TestCase,
 	Tester\FileMock,
-	Bouda\Cache\CacheImplNew;
+	Bouda\Cache\CacheImpl;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -18,7 +18,7 @@ class CacheTest extends TestCase
 
 	public function setUp()
 	{
-		$this->cache = new CacheImplNew();
+		$this->cache = new CacheImpl();
 	}
 
 

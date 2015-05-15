@@ -5,76 +5,84 @@ namespace Bouda\Cache;
 use Bouda\Logger;
 
 
-class CacheImpl implements Cache
+class CacheImpl
 {
-	const SERIALIZED_SUFFIX = 'serialized';
-
-	private $cacheDir;
+	public $cache = array();
 
 
-	function __construct(string $cacheDir)
+	function save($object, string $key = NULL, string $version = NULL) : string
 	{
-		$this->cacheDir = $cacheDir;
-	}
+		$serialized = serialize($object);
 
 
-	public function load(string $id, string $version)
-	{
-		if ($this->isCached($id, $version))
+		if ($key === NULL)
 		{
-			Logger::log();
-
-			return $this->loadFromCache($id, $version);
+			if (is_object($object))
+			{
+				$key = get_class($object) . spl_object_hash($object);
+			}
+			else
+			{
+				$key = md5($serialized);
+			}
 		}
 
-		return NULL;
-	}
-
-
-	private function isCached(string $id, string $version) : bool
-	{
-		return file_exists($this->getCachedFilename($id, $version));
-	}
-
-
-	private function getCachedFilename(string $id, string $version) : string
-	{
-		return $this->cacheDir . $id . '.' . $version . '.' . self::SERIALIZED_SUFFIX;
-	}
-
-
-	private function loadFromCache(string $id, string $version)
-	{
-		return unserialize(file_get_contents($this->getCachedFilename($id, $version)));
-	}
-
-
-
-	public function save($object, string $id, string $version)
-	{
-		$this->invalidateCache($id);
-
-		$filename = $this->getCachedFilename($id, $version);
-
-		file_put_contents($filename, serialize($object));
-
-		Logger::log($filename);
-	}
-
-
-	private function invalidateCache(string $id)
-	{
-		foreach (glob($this->cacheDir . $id . '.*') as $filename)
+		if ($version === NULL)
 		{
-			$this->deleteFile($filename);
+			$this->cache[$key] = $serialized;
 		}
+		else
+		{
+			$this->cache[$key][$version] = $serialized;
+		}
+
+		return $key;
 	}
 
 
-	private function deleteFile($filename)
+	public static function getKeyFromFile(string $filename)
 	{
-		Logger::log($filename);
+		return md5($filename);
+	}
 
-		unlink($filename);
+
+	public function getVersionFromFile(string $filename)
+	{
+		return md5(filesize($filename) . filemtime($filename));
+	}
+
+
+	public function invalidateByKey($key)
+	{
+		unset($this->cache[$key]);
+	}
+
+
+	public function load(string $key, $version = NULL)
+	{
+		if ($version === NULL)
+		{
+			if (!isset($this->cache[$key]))
+			{
+				return NULL;
+			}
+
+			if (is_array($this->cache[$key]))
+			{
+				throw new Exception('You must specify version');
+			}
+
+			return unserialize($this->cache[$key]);
+		}
+		else
+		{
+			if (!isset($this->cache[$key][$version]))
+			{
+				return NULL;
+			}
+
+			return unserialize($this->cache[$key][$version]);
+		}
+		
 	}
 }
