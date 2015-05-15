@@ -7,7 +7,8 @@ use Tester\Assert,
 	Nette\Neon\Decoder,
 	Bouda\Config\Config,
 	Bouda\Config\NeonConfig,
-	Bouda\DI\Container;
+	Bouda\DI\Container,
+	Bouda\DI\ServiceFactory;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -27,7 +28,7 @@ class MockClass
 
 
 
-class DITest extends TestCase
+class ContainerTest extends TestCase
 {
 	private $container;
 
@@ -93,5 +94,5 @@ class DITest extends TestCase
 }
 
 
-$testCase = new DITest;
+$testCase = new ContainerTest;
 $testCase->run();

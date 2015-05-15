@@ -16,12 +16,12 @@ class Container
 	private $alreadyCreating = array();
 
 
-	function __construct(Config $config)
+	function __construct(Config $config, ServiceFactory $serviceFactory = NULL)
 	{
 		$this->config = $config;
 
 		$this->serviceRepository = new ServiceRepository($config);
-		$this->serviceFactory = new ServiceFactory($config, new DependencyResolver($this));
+		$this->serviceFactory = $serviceFactory ?? new ConfigServiceFactory($config, $this);
 
 		$this->serviceRepository->add('config', $config);
 		$this->serviceRepository->add('container', $this);
