@@ -2,13 +2,13 @@
 
 namespace Bouda\Config;
 
-use Nette\Neon\Decoder;
+use Nette\Neon\Neon;
 
 
 class NeonConfig extends BaseConfig
 {
-	function __construct(Decoder $decoder, string $filename)
+	function __construct(string $filename)
 	{
-		$this->config = $decoder->decode(file_get_contents($filename));
+		$this->config = Neon::decode(file_get_contents($filename));
 	}
 }

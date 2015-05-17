@@ -21,7 +21,7 @@ class CacheTest extends TestCase
 	public function setUp()
 	{
 		$this->configIni = new IniConfig('config.ini');
-		$this->configNeon = new NeonConfig(new Decoder, 'config.neon');
+		$this->configNeon = new NeonConfig('config.neon');
 	}
 
 

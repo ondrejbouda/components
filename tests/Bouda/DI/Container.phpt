@@ -35,7 +35,7 @@ class ContainerTest extends TestCase
 
 	public function setUp()
 	{
-		$this->container = new Container(new NeonConfig(new Decoder, 'config.neon'));
+		$this->container = new Container(new NeonConfig('config.neon'));
 	}
 
 
