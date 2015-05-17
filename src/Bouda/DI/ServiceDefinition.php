@@ -10,15 +10,20 @@ class ServiceDefinition
 	private $name;
 	private $type;
 	private $class;
-	private $arguments = array();
+	private $args = array();
 
 
-	function __construct(string $name, array $serviceConfig)
+	function __construct(string $serviceName, array $serviceConfig)
 	{
-		$this->name = $name;
-		$this->type = isset($serviceConfig['type']) ? $serviceConfig['type'] : $serviceConfig['class'];
+		if (!isset($serviceConfig['class']))
+		{
+			throw new Exception("'class' parameter of service definition not set");
+		}
+
+		$this->name = $serviceName;
+		$this->type = $serviceConfig['type'] ?? $serviceConfig['class'];
 		$this->class = $serviceConfig['class'];
-		$this->arguments = $serviceConfig['args'];
+		$this->args = $serviceConfig['args'] ?? array();
 	}
 
 
@@ -40,8 +45,8 @@ class ServiceDefinition
 	}
 
 
-	public function getArguments() : array
+	public function getArgs() : array
 	{
-		return $this->arguments;
+		return $this->args;
 	}
 }

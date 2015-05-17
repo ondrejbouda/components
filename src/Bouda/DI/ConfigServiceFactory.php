@@ -45,7 +45,7 @@ class ConfigServiceFactory implements ServiceFactory
 	{
 		$dependencies = array();
 
-		foreach ($serviceDefinition->getArguments() as $type => $value)
+		foreach ($serviceDefinition->getArgs() as $type => $value)
 		{
 			if (is_numeric($type))
 			{
