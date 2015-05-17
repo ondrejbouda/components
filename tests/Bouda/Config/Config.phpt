@@ -6,7 +6,7 @@ use Tester\Assert,
 	Tester\TestCase,
 	Bouda\Config\IniConfig,
 	Bouda\Config\NeonConfig,
-	Nette\Neon\Decoder;
+	Bouda\Config\NeonDecoderImpl;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -21,7 +21,7 @@ class CacheTest extends TestCase
 	public function setUp()
 	{
 		$this->configIni = new IniConfig('config.ini');
-		$this->configNeon = new NeonConfig('config.neon');
+		$this->configNeon = new NeonConfig(new NeonDecoderImpl(), 'config.neon');
 	}
 
 

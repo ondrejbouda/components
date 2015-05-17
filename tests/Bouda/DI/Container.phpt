@@ -7,6 +7,7 @@ use Tester\Assert,
 	Nette\Neon\Decoder,
 	Bouda\Config\Config,
 	Bouda\Config\NeonConfig,
+	Bouda\Config\NeonDecoderImpl,
 	Bouda\DI\Container,
 	Bouda\DI\ServiceFactory;
 
@@ -35,7 +36,7 @@ class ContainerTest extends TestCase
 
 	public function setUp()
 	{
-		$this->container = new Container(new NeonConfig('config.neon'));
+		$this->container = new Container(new NeonConfig(new NeonDecoderImpl(), 'config.neon'));
 	}
 
 
