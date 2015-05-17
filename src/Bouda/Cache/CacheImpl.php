@@ -7,7 +7,7 @@ use Bouda\Logger;
 
 class CacheImpl
 {
-	public $cache = array();
+	public $cache = [];
 
 
 	function save($object, string $key = NULL, string $version = NULL) : string

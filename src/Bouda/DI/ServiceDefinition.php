@@ -10,7 +10,7 @@ class ServiceDefinition
 	private $name;
 	private $type;
 	private $class;
-	private $args = array();
+	private $args = [];
 
 
 	function __construct(string $serviceName, array $serviceConfig)
@@ -23,7 +23,7 @@ class ServiceDefinition
 		$this->name = $serviceName;
 		$this->type = $serviceConfig['type'] ?? $serviceConfig['class'];
 		$this->class = $serviceConfig['class'];
-		$this->args = $serviceConfig['args'] ?? array();
+		$this->args = $serviceConfig['args'] ?? [];
 	}
 
 

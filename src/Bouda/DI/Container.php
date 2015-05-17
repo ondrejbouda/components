@@ -13,7 +13,7 @@ class Container
 	private $serviceRepository;
 	private $serviceFactory;
 
-	private $alreadyCreating = array();
+	private $alreadyCreating = [];
 
 
 	function __construct(Config $config, ServiceFactory $serviceFactory = NULL)

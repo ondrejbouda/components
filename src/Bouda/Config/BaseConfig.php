@@ -5,7 +5,7 @@ namespace Bouda\Config;
 
 class BaseConfig implements Config
 {
-	protected $config = array();
+	protected $config = [];
 
 
 	public function get(string $section, string $variable = NULL)

@@ -40,20 +40,20 @@ class CacheTest extends TestCase
 
 	public function testGetArray()
 	{
-		$expectedArray = array(
+		$expectedArray = [
 			'filename' => 'logs/log.txt',
 			'cacheDir' => 'cache/'
-		);
+		];
 		Assert::equal($expectedArray, $this->configIni->get('resources'));
 		Assert::equal($expectedArray, $this->configNeon->get('resources'));
 	}
 
 	public function testGetByCompoundPath()
 	{
-		$expectedNestedArray = array(
+		$expectedNestedArray = [
 			'class' => 'Bouda\Container',
 			'args' => NULL
-		);
+		];
 		Assert::equal($expectedNestedArray, $this->configIni->get('services.container'));
 		Assert::equal($expectedNestedArray, $this->configIni->get('services', 'container'));
 		Assert::equal($expectedNestedArray, $this->configNeon->get('services.container'));

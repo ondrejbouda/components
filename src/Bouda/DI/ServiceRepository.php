@@ -10,8 +10,8 @@ class ServiceRepository
 {
 	private $config;
 
-	private $servicesByName = array();
-	private $servicesByType = array();
+	private $servicesByName = [];
+	private $servicesByType = [];
 
 
 	function __construct(Config $config)

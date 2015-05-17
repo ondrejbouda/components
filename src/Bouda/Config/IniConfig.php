@@ -9,7 +9,7 @@ class IniConfig extends BaseConfig
 	{
 		$parsedConfig = parse_ini_file($filename, true);
 
-		$splitConfig = array();
+		$splitConfig = [];
 
 		foreach ($parsedConfig as $key => $value)
 		{
@@ -21,7 +21,7 @@ class IniConfig extends BaseConfig
 			{
 				if (!isset($currentElement[$section]))
 				{
-					$currentElement[$section] = array();
+					$currentElement[$section] = [];
 				}
 				
 				$currentElement = &$currentElement[$section];
