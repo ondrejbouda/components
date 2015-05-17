@@ -19,19 +19,7 @@ class ConfigServiceFactory implements ServiceFactory
 	}
 
 
-	public function create(string $serviceName)
-	{
-		$serviceDefinition = $this->getServiceDefinition($serviceName);
-		
-		$dependencies = $this->getServiceDependencies($serviceDefinition);
-
-		$class = $serviceDefinition->getClass();
-
-		return new $class(...$dependencies);
-	}
-
-
-	private function getServiceDefinition(string $serviceName) : ServiceDefinition
+	public function getServiceDefinition(string $serviceName) : ServiceDefinition
 	{
 		try {
 			return new ServiceDefinition($serviceName, $this->config->get('services', $serviceName));
@@ -40,6 +28,16 @@ class ConfigServiceFactory implements ServiceFactory
 		{
 			throw new Exception('Unknown service "' . $serviceName . '"');;
 		}
+	}
+
+
+	public function create(ServiceDefinition $serviceDefinition)
+	{
+		$dependencies = $this->getServiceDependencies($serviceDefinition);
+
+		$class = $serviceDefinition->getClass();
+
+		return new $class(...$dependencies);
 	}
 
 

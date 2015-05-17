@@ -20,13 +20,10 @@ class ServiceRepository
 	}
 
 
-	public function add(string $serviceName, $service)
+	public function add(ServiceDefinition $serviceDefinition, $service)
 	{
-		$this->servicesByName[$serviceName] = $service;
-
-		$type = $this->config->get('services', $serviceName)['type'] ?? $this->config->get('services', $serviceName)['class'] ?? gettype($service);
-
-		$this->servicesByType[$type] = $service;
+		$this->servicesByName[$serviceDefinition->getName()] = $service;
+		$this->servicesByType[$serviceDefinition->getType()] = $service;
 	}
 
 

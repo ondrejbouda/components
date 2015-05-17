@@ -5,5 +5,5 @@ namespace Bouda\DI;
 
 interface ServiceFactory
 {
-	function create(string $serviceName);
+	function create(ServiceDefinition $serviceDefinition);
 }

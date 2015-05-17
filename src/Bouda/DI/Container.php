@@ -23,8 +23,8 @@ class Container
 		$this->serviceRepository = new ServiceRepository($config);
 		$this->serviceFactory = $serviceFactory ?? new ConfigServiceFactory($config, $this);
 
-		$this->serviceRepository->add('config', $config);
-		$this->serviceRepository->add('container', $this);
+		$this->serviceRepository->add($this->serviceFactory->getServiceDefinition('config'), $config);
+		$this->serviceRepository->add($this->serviceFactory->getServiceDefinition('container'), $this);
 	}
 
 
@@ -43,8 +43,10 @@ class Container
 
 		$this->alreadyCreating[] = $serviceName;
 
-		$service = $this->serviceFactory->create($serviceName);
-		$this->serviceRepository->add($serviceName, $service);
+		$serviceDefinition = $this->serviceFactory->getServiceDefinition($serviceName);
+		$service = $this->serviceFactory->create($serviceDefinition);
+
+		$this->serviceRepository->add($serviceDefinition, $service);
 
 		unset($this->alreadyCreating[$serviceName]);
 
