@@ -4,23 +4,84 @@ namespace Bouda\DITests;
 
 use Tester\Assert,
 	Tester\TestCase,
-	Nette\Neon\Decoder,
 	Bouda\Config\Config,
-	Bouda\Config\NeonConfig,
-	Bouda\Config\NeonDecoderImpl,
 	Bouda\DI\Container,
-	Bouda\DI\ServiceFactory;
+	Bouda\DI\ServiceFactory,
+	Bouda\DI\ServiceDefinition;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 
 
+class MockConfig implements Config
+{
+	public function get(string $section, string $variable)
+	{
+		return 'value';
+	}
+}
+
+
+class MockServiceFactory implements ServiceFactory
+{
+	private $services = [
+		'config' => [
+			'class' => 'Bouda\Config\Config',
+		],
+		'container' => [
+			'class' => 'Bouda\Config\Container',
+		],
+		'foo' => [
+			'class' => 'Bouda\DITests\MockServiceImpl',
+		],
+		'simple_factory' => [
+			'class' => 'Bouda\DI\SimpleFactory',
+			'args' => [
+				'Bouda\DITests\MockClass'
+			],
+		],
+	];
+
+	public function injectContainer(Container $container) {}
+
+	public function getServiceDefinition(string $serviceName)
+	{
+		return new ServiceDefinition($serviceName, $this->services[$serviceName]);
+	}
+
+	public function create(ServiceDefinition $serviceDefinition)
+	{
+		$class = $serviceDefinition->getClass();
+		return new $class(...$serviceDefinition->getArgs());
+	}
+}
+
+
+class MockServiceFactoryCircular implements ServiceFactory
+{
+	private $container;
+
+	public function injectContainer(Container $container)
+	{
+		$this->container = $container;
+	}
+
+	public function getServiceDefinition(string $serviceName)
+	{
+		return new ServiceDefinition($serviceName, ['class' => 'Bouda\DITests\MockServiceImpl']);
+	}
+
+	public function create(ServiceDefinition $serviceDefinition)
+	{
+		$this->container->getService('foo');
+		return new MockServiceImpl;
+	}
+}
+
+
 interface MockService {}
 
-class MockServiceImpl implements MockService
-{
-	function __construct(Config $config, string $resource) {}
-}
+class MockServiceImpl implements MockService {}
 
 class MockClass
 {
@@ -36,25 +97,7 @@ class ContainerTest extends TestCase
 
 	public function setUp()
 	{
-		$this->container = new Container(new NeonConfig(new NeonDecoderImpl(), 'config.neon'));
-	}
-
-
-	/**
-	 * @throws Bouda\DI\Exception Unknown service "nonexistent"
-	 */
-	public function testGetNonexistentService()
-	{
-		$this->container->getService('nonexistent');
-	}
-
-
-	/**
-	 * @throws Bouda\DI\Exception Cannot resolve dependency "bar" of type "foo"
-	 */
-	public function testGetServiceUnresolvable()
-	{
-		$mockService = $this->container->getService('mock_service_unresolvable');
+		$this->container = new Container(new MockConfig, new MockServiceFactory);
 	}
 
 
@@ -63,13 +106,14 @@ class ContainerTest extends TestCase
 	 */
 	public function testCircularDependency()
 	{
-		$mockService = $this->container->getService('mock_service_circular1');
+		$container = new Container(new MockConfig, new MockServiceFactoryCircular);
+		$container->getService('foo');
 	}
 
 
 	public function testGetService()
 	{
-		$mockService = $this->container->getService('mock_service');
+		$mockService = $this->container->getService('foo');
 
 		Assert::type('Bouda\DITests\MockService', $mockService);
 	}
@@ -90,7 +134,7 @@ class ContainerTest extends TestCase
 
 	public function testGetResource()
 	{
-		Assert::equal('foo', $this->container->getResource('resource'));
+		Assert::equal('value', $this->container->getResource('resource'));
 	}
 }
 
