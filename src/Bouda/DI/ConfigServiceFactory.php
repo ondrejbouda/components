@@ -11,10 +11,15 @@ class ConfigServiceFactory implements ServiceFactory
 	private $config;
 	private $dependencyResolver;
 
-	
-	function __construct(Config $config, Container $container)
+
+	function __construct(Config $config)
 	{
 		$this->config = $config;
+	}
+
+
+	public function injectContainer(Container $container)
+	{
 		$this->dependencyResolver = new DependencyResolver($container);
 	}
 

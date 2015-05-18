@@ -2,8 +2,7 @@
 
 namespace Bouda\DI;
 
-use Bouda\Config\Config,
-	Bouda\Logger;
+use Bouda\Config\Config;
 
 
 class Container
@@ -21,7 +20,8 @@ class Container
 		$this->config = $config;
 
 		$this->serviceRepository = new ServiceRepository($config);
-		$this->serviceFactory = $serviceFactory ?? new ConfigServiceFactory($config, $this);
+		$this->serviceFactory = $serviceFactory ?? new ConfigServiceFactory($config);
+		$this->serviceFactory->injectContainer($this);
 
 		$this->serviceRepository->add($this->serviceFactory->getServiceDefinition('config'), $config);
 		$this->serviceRepository->add($this->serviceFactory->getServiceDefinition('container'), $this);
