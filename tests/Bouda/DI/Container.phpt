@@ -57,28 +57,6 @@ class MockServiceFactory implements ServiceFactory
 }
 
 
-class MockServiceFactoryCircular implements ServiceFactory
-{
-	private $container;
-
-	public function injectContainer(Container $container)
-	{
-		$this->container = $container;
-	}
-
-	public function getServiceDefinition(string $serviceName)
-	{
-		return new ServiceDefinition($serviceName, ['class' => 'Bouda\DITests\MockServiceImpl']);
-	}
-
-	public function create(ServiceDefinition $serviceDefinition)
-	{
-		$this->container->getService('foo');
-		return new MockServiceImpl;
-	}
-}
-
-
 interface MockService {}
 
 class MockServiceImpl implements MockService {}
@@ -98,16 +76,6 @@ class ContainerTest extends TestCase
 	public function setUp()
 	{
 		$this->container = new Container(new MockConfig, new MockServiceFactory);
-	}
-
-
-	/**
-	 * @throws Bouda\DI\Exception Circular dependency found, cannot continue
-	 */
-	public function testCircularDependency()
-	{
-		$container = new Container(new MockConfig, new MockServiceFactoryCircular);
-		$container->getService('foo');
 	}
 
 
