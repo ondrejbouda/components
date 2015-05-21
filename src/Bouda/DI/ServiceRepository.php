@@ -8,16 +8,8 @@ use Bouda\Config\Config,
 
 class ServiceRepository
 {
-	private $config;
-
 	private $servicesByName = [];
 	private $servicesByType = [];
-
-
-	function __construct(Config $config)
-	{
-		$this->config = $config;
-	}
 
 
 	public function add(ServiceDefinition $serviceDefinition, $service)

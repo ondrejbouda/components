@@ -19,7 +19,7 @@ class Container
 	{
 		$this->config = $config;
 
-		$this->serviceRepository = new ServiceRepository($config);
+		$this->serviceRepository = new ServiceRepository();
 		$this->serviceFactory = $serviceFactory ?? new ConfigServiceFactory($config);
 		$this->serviceFactory->injectContainer($this);
 
