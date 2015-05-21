@@ -30,13 +30,15 @@ class MockServiceFactoryCircular implements ServiceFactory
 
 	public function getServiceDefinition(string $serviceName)
 	{
-		return new ServiceDefinition($serviceName, ['class' => 'Bouda\DITests\MockServiceImpl']);
+		return new ServiceDefinition($serviceName, ['class' => 'Bouda\DITests\MockService']);
 	}
 
 	public function create(ServiceDefinition $serviceDefinition)
 	{
+		// simulate circular dependency
 		$this->container->getService('foo');
-		return new MockServiceImpl;
+
+		return new MockService;
 	}
 }
 
