@@ -25,6 +25,24 @@ class CacheTest extends TestCase
 	}
 
 
+	/**
+	 * @throws Bouda\Config\Exception Config file "nonexistent.file" not found.
+	 */
+	public function testNonexistentFileIni()
+	{
+		new IniConfig('nonexistent.file');
+	}
+
+
+	/**
+	 * @throws Bouda\Config\Exception Config file "nonexistent.file" not found.
+	 */
+	public function testNonexistentFileNeon()
+	{
+		new IniConfig('nonexistent.file');
+	}
+
+
 	public function testEquality()
 	{
 		Assert::equal($this->configIni->get('services'), $this->configNeon->get('services'));
@@ -61,19 +79,20 @@ class CacheTest extends TestCase
 	}
 
 	/**
-	 * @throws Bouda\Config\Exception
+	 * @throws Bouda\Config\Exception Section "nonexistent" not found.
 	 */
-	public function testExceptionIni()
-	{
-		$this->configIni->get('nonexistent');
-	}
-
-	/**
-	 * @throws Bouda\Config\Exception
-	 */
-	public function testExceptionNeon()
+	public function testNonexistentSectionIni()
 	{
 		$this->configNeon->get('nonexistent');
+	}
+
+
+	/**
+	 * @throws Bouda\Config\Exception Config variable "nonexistent" in section "services" not found.
+	 */
+	public function testNonexistentVariableIni()
+	{
+		$this->configNeon->get('services', 'nonexistent');
 	}
 }
 

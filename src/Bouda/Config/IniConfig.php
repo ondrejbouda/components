@@ -7,6 +7,8 @@ class IniConfig extends BaseConfig
 {
 	function __construct(string $filename)
 	{
+		$this->checkIfFileExists($filename);
+
 		$parsedConfig = parse_ini_file($filename, true);
 
 		$splitConfig = [];

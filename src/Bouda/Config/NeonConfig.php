@@ -7,6 +7,8 @@ class NeonConfig extends BaseConfig
 {
 	function __construct(NeonDecoder $decoder, string $filename)
 	{
+		$this->checkIfFileExists($filename);
+
 		$this->config = $decoder->decode(file_get_contents($filename));
 	}
 }

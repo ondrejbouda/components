@@ -45,4 +45,13 @@ class BaseConfig implements Config
 
 		return $currentElement;
 	}
+
+
+	protected function checkIfFileExists(string $filename)
+	{
+		if (!file_exists($filename))
+		{
+			throw new Exception('Config file "' . $filename . '" not found.');
+		}
+	}
 }
