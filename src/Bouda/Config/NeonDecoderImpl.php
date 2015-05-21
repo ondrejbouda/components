@@ -7,7 +7,7 @@ use Nette\Neon\Neon;
 
 class NeonDecoderImpl implements NeonDecoder
 {
-	function decode(string $input)
+	public function decode(string $input)
 	{
 		return Neon::decode($input);
 	}

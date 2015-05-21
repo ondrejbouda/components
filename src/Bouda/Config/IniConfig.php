@@ -5,7 +5,7 @@ namespace Bouda\Config;
 
 class IniConfig extends BaseConfig
 {
-	function __construct(string $filename)
+	public function __construct(string $filename)
 	{
 		$this->checkIfFileExists($filename);
 

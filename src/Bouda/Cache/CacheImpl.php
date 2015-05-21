@@ -10,7 +10,7 @@ class CacheImpl
 	public $cache = [];
 
 
-	function save($object, string $key = NULL, string $version = NULL) : string
+	public function save($object, string $key = NULL, string $version = NULL) : string
 	{
 		$serialized = serialize($object);
 

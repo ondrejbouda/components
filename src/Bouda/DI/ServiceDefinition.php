@@ -13,7 +13,7 @@ class ServiceDefinition
 	private $args = [];
 
 
-	function __construct(string $serviceName, array $serviceConfig)
+	public function __construct(string $serviceName, array $serviceConfig)
 	{
 		if (!isset($serviceConfig['class']))
 		{

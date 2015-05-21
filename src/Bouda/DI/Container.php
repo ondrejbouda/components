@@ -15,7 +15,7 @@ class Container
 	private $alreadyCreating = [];
 
 
-	function __construct(Config $config, ServiceFactory $serviceFactory = NULL)
+	public function __construct(Config $config, ServiceFactory $serviceFactory = NULL)
 	{
 		$this->config = $config;
 

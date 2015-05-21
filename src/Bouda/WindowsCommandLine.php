@@ -13,7 +13,7 @@ class WindowsCommandLine
 		852 => 'CP852',
 	];
 
-	function __construct()
+	public function __construct()
 	{
 		if (in_array('exec', explode(', ', ini_get('disable_functions'))))
 		{

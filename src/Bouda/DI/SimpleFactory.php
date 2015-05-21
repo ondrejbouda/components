@@ -10,7 +10,7 @@ class SimpleFactory implements Factory
 	private $dependencies;
 
 
-	function __construct(string $class, ...$dependencies)
+	public function __construct(string $class, ...$dependencies)
 	{
 		$this->class = $class;
 		$this->dependencies = $dependencies;
