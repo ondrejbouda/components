@@ -2,9 +2,9 @@
 
 require_once('vendor/autoload.php');
 
-use Nette\Neon\Decoder,
-	Tracy\Debugger,
-	Bouda\Config\ConfigNeon,
+use Tracy\Debugger,
+	Bouda\Config\NeonConfig,
+	Bouda\Config\NeonDecoderImpl,
 	Bouda\DI\Container,
 	Bouda\Logger;
 
@@ -12,6 +12,6 @@ use Nette\Neon\Decoder,
 Debugger::enable();
 
 
-$config = new ConfigNeon(new Decoder, 'config/config.neon');
-Logger::setLogFile($config->get('resources', 'logFile'));
+$config = new NeonConfig(new NeonDecoderImpl, __DIR__ . '/config/config.neon');
+Logger::setLogFile(__DIR__ . '/' . $config->get('resources', 'logFile'));
 $container = new Container($config);
