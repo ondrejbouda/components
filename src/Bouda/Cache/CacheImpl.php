@@ -5,7 +5,7 @@ namespace Bouda\Cache;
 use Bouda\Logger;
 
 
-class CacheImpl
+class CacheImpl implements Cache
 {
 	public $cache = [];
 
@@ -58,7 +58,7 @@ class CacheImpl
 	}
 
 
-	public function load(string $key, $version = NULL)
+	public function load(string $key, string $version = NULL)
 	{
 		if ($version === NULL)
 		{
