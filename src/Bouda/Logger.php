@@ -3,7 +3,7 @@
 namespace Bouda;
 
 
-class Logger
+class Logger extends Bouda\Object
 {
     private static $logFile;
 

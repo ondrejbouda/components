@@ -2,10 +2,11 @@
 
 namespace Bouda\Cache;
 
-use Bouda\Logger;
+use Bouda,
+	Bouda\Logger;
 
 
-class CacheImpl implements Cache
+class CacheImpl extends Bouda\Object implements Cache 
 {
 	public $cache = [];
 

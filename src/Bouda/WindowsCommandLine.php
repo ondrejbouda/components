@@ -3,7 +3,7 @@
 namespace Bouda;
 
 
-class WindowsCommandLine
+class WindowsCommandLine extends Bouda\Object
 {
 	const PHP_CHARSET = 'UTF-8';
 

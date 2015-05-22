@@ -2,10 +2,10 @@
 
 namespace Bouda\DI;
 
-use Bouda\Logger;
+use Bouda;
 
 
-class ServiceDefinition
+class ServiceDefinition extends Bouda\Object
 {
 	private $name;
 	private $type;

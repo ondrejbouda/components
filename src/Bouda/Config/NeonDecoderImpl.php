@@ -2,10 +2,11 @@
 
 namespace Bouda\Config;
 
-use Nette\Neon\Neon;
+use Bouda,
+	Nette\Neon\Neon;
 
 
-class NeonDecoderImpl implements NeonDecoder
+class NeonDecoderImpl extends Bouda\Object implements NeonDecoder
 {
 	public function decode(string $input)
 	{

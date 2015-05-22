@@ -2,8 +2,10 @@
 
 namespace Bouda\DI;
 
+use Bouda;
 
-class SimpleFactory implements Factory
+
+class SimpleFactory extends Bouda\Object implements Factory
 {
 	private $class;
 

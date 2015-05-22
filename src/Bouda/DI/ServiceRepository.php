@@ -2,11 +2,11 @@
 
 namespace Bouda\DI;
 
-use Bouda\Config\Config,
-	Bouda\Logger;
+use Bouda,
+	Bouda\Config\Config;
 
 
-class ServiceRepository
+class ServiceRepository extends Bouda\Object
 {
 	private $servicesByName = [];
 	private $servicesByType = [];
