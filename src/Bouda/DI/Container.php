@@ -2,10 +2,11 @@
 
 namespace Bouda\DI;
 
-use Bouda\Config\Config;
+use Bouda,
+	Bouda\Config\Config;
 
 
-class Container
+class Container extends Bouda\Object
 {
 	private $config;
 

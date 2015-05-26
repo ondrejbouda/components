@@ -2,10 +2,10 @@
 
 namespace Bouda\DI;
 
-use Bouda\Logger;
+use Bouda;
 
 
-class DependencyResolver
+class DependencyResolver extends Bouda\Object
 {
 	const TYPE_STRING = 'string';
 	const TYPE_CLASS = 'class';

@@ -2,8 +2,10 @@
 
 namespace Bouda\Config;
 
+use Bouda;
 
-class BaseConfig implements Config
+
+class BaseConfig extends Bouda\Object implements Config
 {
 	protected $config = [];
 

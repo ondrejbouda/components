@@ -2,11 +2,11 @@
 
 namespace Bouda\DI;
 
-use Bouda\Config\Config,
-	Bouda\Logger;
+use Bouda,
+	Bouda\Config\Config;
 
 
-class ConfigServiceFactory implements ServiceFactory
+class ConfigServiceFactory extends Bouda\Object implements ServiceFactory
 {
 	private $config;
 	private $dependencyResolver;
