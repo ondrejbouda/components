@@ -93,10 +93,23 @@ class ContainerTest extends TestCase
 
 		Assert::type('Bouda\DI\Factory', $factory);
 		Assert::type('Bouda\DI\SimpleFactory', $factory);
+	}
 
+
+	public function testGetInstanceFromFactory()
+	{
 		$instance = $this->container->getInstanceFromFactory('simple_factory', 'foo');
 
 		Assert::type('Bouda\DITests\MockClass', $instance);
+	}
+
+
+	/**
+	 * @throws Bouda\DI\Exception Service is not a factory.
+	 */
+	public function testGetFactoryWhichIsNotFactory()
+	{
+		$factory = $this->container->getFactory('foo');
 	}
 
 

@@ -28,6 +28,13 @@ class Container
 	}
 
 
+	/**
+	 * Get service from repository by name. 
+	 * 
+	 * @param string $serviceName
+	 * @return mixed service
+	 * @throws Bouda\DI\Exception
+	 */
 	public function getService(string $serviceName)
 	{
 		return $this->serviceRepository->getByName($serviceName) ?? $this->createService($serviceName);
@@ -54,18 +61,47 @@ class Container
 	}
 
 
+	/**
+	 * Get factory from repository by name. The registered service must be of type Bouda\DI\Factory.
+	 * 
+	 * @param string $factoryName
+	 * @return Bouda\DI\Factory
+	 * @throws Bouda\DI\Exception
+	 */
 	public function getFactory(string $factoryName) : Factory
 	{
-		return $this->getService($factoryName);
+		$factory = $this->getService($factoryName);
+
+		if ($factory instanceof Factory)
+		{
+			return $factory;
+		}
+
+		throw new Exception('Service is not a factory.');
 	}
 
 
+	/**
+	 * Get instance from factory by name. The registered service must be of type Bouda\DI\Factory.
+	 * 
+	 * @param string $factoryName
+	 * @param mixed $args,... optional arguments passed to the factory creation method
+	 * @return mixed
+	 * @throws Bouda\DI\Exception
+	 */
 	public function getInstanceFromFactory(string $factoryName, ...$args)
 	{
 		return $this->getFactory($factoryName)->create(...$args);
 	}
 
 
+	/**
+	 * Get resource from config by name.
+	 * 
+	 * @param string $resourceName
+	 * @return string resource value
+	 * @throws Bouda\Config\Exception
+	 */
 	public function getResource(string $resourceName)
 	{
 		return $this->config->get('resources', $resourceName);
