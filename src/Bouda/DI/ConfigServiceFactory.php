@@ -3,63 +3,63 @@
 namespace Bouda\DI;
 
 use Bouda,
-	Bouda\Config\Config;
+    Bouda\Config\Config;
 
 
 class ConfigServiceFactory extends Bouda\Object implements ServiceFactory
 {
-	private $config;
-	private $dependencyResolver;
+    private $config;
+    private $dependencyResolver;
 
 
-	public function __construct(Config $config)
-	{
-		$this->config = $config;
-	}
+    public function __construct(Config $config)
+    {
+        $this->config = $config;
+    }
 
 
-	public function injectContainer(Container $container)
-	{
-		$this->dependencyResolver = new DependencyResolver($container);
-	}
+    public function injectContainer(Container $container)
+    {
+        $this->dependencyResolver = new DependencyResolver($container);
+    }
 
 
-	public function getServiceDefinition(string $serviceName) : ServiceDefinition
-	{
-		try {
-			return new ServiceDefinition($serviceName, $this->config->get('services', $serviceName));
-		}
-		catch (\Bouda\Config\Exception $e)
-		{
-			throw new Exception('Unknown service "' . $serviceName . '"');;
-		}
-	}
+    public function getServiceDefinition(string $serviceName) : ServiceDefinition
+    {
+        try {
+            return new ServiceDefinition($serviceName, $this->config->get('services', $serviceName));
+        }
+        catch (\Bouda\Config\Exception $e)
+        {
+            throw new Exception('Unknown service "' . $serviceName . '"');;
+        }
+    }
 
 
-	public function create(ServiceDefinition $serviceDefinition)
-	{
-		$dependencies = $this->getServiceDependencies($serviceDefinition);
+    public function create(ServiceDefinition $serviceDefinition)
+    {
+        $dependencies = $this->getServiceDependencies($serviceDefinition);
 
-		$class = $serviceDefinition->getClass();
+        $class = $serviceDefinition->getClass();
 
-		return new $class(...$dependencies);
-	}
+        return new $class(...$dependencies);
+    }
 
 
-	private function getServiceDependencies(ServiceDefinition $serviceDefinition) : array
-	{
-		$dependencies = array();
+    private function getServiceDependencies(ServiceDefinition $serviceDefinition) : array
+    {
+        $dependencies = array();
 
-		foreach ($serviceDefinition->getArgs() as $type => $value)
-		{
-			if (is_numeric($type))
-			{
-				$type = DependencyResolver::TYPE_STRING;
-			}
+        foreach ($serviceDefinition->getArgs() as $type => $value)
+        {
+            if (is_numeric($type))
+            {
+                $type = DependencyResolver::TYPE_STRING;
+            }
 
-			$dependencies[] = $this->dependencyResolver->resolveDependency($type, $value);
-		}
+            $dependencies[] = $this->dependencyResolver->resolveDependency($type, $value);
+        }
 
-		return $dependencies;
-	}
+        return $dependencies;
+    }
 }

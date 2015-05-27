@@ -5,5 +5,5 @@ namespace Bouda\Config;
 
 interface NeonDecoder
 {
-	function decode(string $input);
+    function decode(string $input);
 }

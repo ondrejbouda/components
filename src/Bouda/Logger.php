@@ -15,7 +15,7 @@ class Logger extends Bouda\Object
     // mlog:)
     public static function log($whatever = NULL)
     {
-		if (isset(self::$logFile) && $fw = fopen(self::$logFile, 'a'))
+        if (isset(self::$logFile) && $fw = fopen(self::$logFile, 'a'))
         {
             $stack = debug_backtrace(0);
 

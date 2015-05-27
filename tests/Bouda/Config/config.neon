@@ -1,19 +1,17 @@
 resources:
-	
-	filename: logs/log.txt
-	cacheDir: cache/
+    
+    filename: logs/log.txt
+    cacheDir: cache/
 
 
 services:
-	
-	config:
-		type: Bouda\Config
-		class: Bouda\ConfigNeon
-		args:
-			resource: config
-	
-	container:
-		class: Bouda\Container
-		args: 
-
-
+    
+    config:
+        type: Bouda\Config
+        class: Bouda\ConfigNeon
+        args:
+            resource: config
+    
+    container:
+        class: Bouda\Container
+        args: 

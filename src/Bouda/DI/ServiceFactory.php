@@ -5,9 +5,9 @@ namespace Bouda\DI;
 
 interface ServiceFactory
 {
-	function injectContainer(Container $container);
+    function injectContainer(Container $container);
 
-	function getServiceDefinition(string $serviceName);
-	
-	function create(ServiceDefinition $serviceDefinition);
+    function getServiceDefinition(string $serviceName);
+    
+    function create(ServiceDefinition $serviceDefinition);
 }

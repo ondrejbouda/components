@@ -3,87 +3,87 @@
 namespace Bouda\Cache;
 
 use Bouda,
-	Bouda\Logger;
+    Bouda\Logger;
 
 
 class CacheImpl extends Bouda\Object implements Cache 
 {
-	public $cache = [];
+    public $cache = [];
 
 
-	public function save($object, string $key = NULL, string $version = NULL) : string
-	{
-		$serialized = serialize($object);
+    public function save($object, string $key = NULL, string $version = NULL) : string
+    {
+        $serialized = serialize($object);
 
 
-		if ($key === NULL)
-		{
-			if (is_object($object))
-			{
-				$key = get_class($object) . spl_object_hash($object);
-			}
-			else
-			{
-				$key = md5($serialized);
-			}
-		}
+        if ($key === NULL)
+        {
+            if (is_object($object))
+            {
+                $key = get_class($object) . spl_object_hash($object);
+            }
+            else
+            {
+                $key = md5($serialized);
+            }
+        }
 
-		if ($version === NULL)
-		{
-			$this->cache[$key] = $serialized;
-		}
-		else
-		{
-			$this->cache[$key][$version] = $serialized;
-		}
+        if ($version === NULL)
+        {
+            $this->cache[$key] = $serialized;
+        }
+        else
+        {
+            $this->cache[$key][$version] = $serialized;
+        }
 
-		return $key;
-	}
-
-
-	public static function getKeyFromFile(string $filename)
-	{
-		return md5($filename);
-	}
+        return $key;
+    }
 
 
-	public function getVersionFromFile(string $filename)
-	{
-		return md5(filesize($filename) . filemtime($filename));
-	}
+    public static function getKeyFromFile(string $filename)
+    {
+        return md5($filename);
+    }
 
 
-	public function invalidateByKey($key)
-	{
-		unset($this->cache[$key]);
-	}
+    public function getVersionFromFile(string $filename)
+    {
+        return md5(filesize($filename) . filemtime($filename));
+    }
 
 
-	public function load(string $key, string $version = NULL)
-	{
-		if ($version === NULL)
-		{
-			if (!isset($this->cache[$key]))
-			{
-				return NULL;
-			}
+    public function invalidateByKey($key)
+    {
+        unset($this->cache[$key]);
+    }
 
-			if (is_array($this->cache[$key]))
-			{
-				throw new Exception('You must specify version');
-			}
 
-			return unserialize($this->cache[$key]);
-		}
-		else
-		{
-			if (!isset($this->cache[$key][$version]))
-			{
-				return NULL;
-			}
+    public function load(string $key, string $version = NULL)
+    {
+        if ($version === NULL)
+        {
+            if (!isset($this->cache[$key]))
+            {
+                return NULL;
+            }
 
-			return unserialize($this->cache[$key][$version]);
-		}
-		
-	}
+            if (is_array($this->cache[$key]))
+            {
+                throw new Exception('You must specify version');
+            }
+
+            return unserialize($this->cache[$key]);
+        }
+        else
+        {
+            if (!isset($this->cache[$key][$version]))
+            {
+                return NULL;
+            }
+
+            return unserialize($this->cache[$key][$version]);
+        }
+        
+    }
 }

@@ -5,5 +5,5 @@ namespace Bouda\Config;
 
 interface Config
 {
-	function get(string $section, string $variable);
+    function get(string $section, string $variable);
 }
