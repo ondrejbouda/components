@@ -16,7 +16,7 @@ class Container extends Bouda\Object
     private $alreadyCreating = [];
 
 
-    public function __construct(Config $config, ServiceFactory $serviceFactory = NULL)
+    public function __construct(Config $config, ServiceFactory $serviceFactory = null)
     {
         $this->config = $config;
 

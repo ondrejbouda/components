@@ -70,7 +70,7 @@ class CacheTest extends TestCase
     {
         $expectedNestedArray = [
             'class' => 'Bouda\Container',
-            'args' => NULL
+            'args' => null
         ];
         Assert::equal($expectedNestedArray, $this->configIni->get('services.container'));
         Assert::equal($expectedNestedArray, $this->configIni->get('services', 'container'));

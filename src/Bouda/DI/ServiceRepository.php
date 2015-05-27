@@ -21,6 +21,6 @@ class ServiceRepository extends Bouda\Object
 
     public function getByName(string $serviceName)
     {
-        return $this->servicesByName[$serviceName] ?? NULL;
+        return $this->servicesByName[$serviceName] ?? null;
     }
 }

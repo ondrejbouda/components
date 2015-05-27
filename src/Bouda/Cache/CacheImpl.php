@@ -11,12 +11,12 @@ class CacheImpl extends Bouda\Object implements Cache
     public $cache = [];
 
 
-    public function save($object, string $key = NULL, string $version = NULL) : string
+    public function save($object, string $key = null, string $version = null) : string
     {
         $serialized = serialize($object);
 
 
-        if ($key === NULL)
+        if ($key === null)
         {
             if (is_object($object))
             {
@@ -28,7 +28,7 @@ class CacheImpl extends Bouda\Object implements Cache
             }
         }
 
-        if ($version === NULL)
+        if ($version === null)
         {
             $this->cache[$key] = $serialized;
         }
@@ -59,13 +59,13 @@ class CacheImpl extends Bouda\Object implements Cache
     }
 
 
-    public function load(string $key, string $version = NULL)
+    public function load(string $key, string $version = null)
     {
-        if ($version === NULL)
+        if ($version === null)
         {
             if (!isset($this->cache[$key]))
             {
-                return NULL;
+                return null;
             }
 
             if (is_array($this->cache[$key]))
@@ -79,7 +79,7 @@ class CacheImpl extends Bouda\Object implements Cache
         {
             if (!isset($this->cache[$key][$version]))
             {
-                return NULL;
+                return null;
             }
 
             return unserialize($this->cache[$key][$version]);

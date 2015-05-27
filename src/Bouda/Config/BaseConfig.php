@@ -10,11 +10,11 @@ class BaseConfig extends Bouda\Object implements Config
     protected $config = [];
 
 
-    public function get(string $section, string $variable = NULL)
+    public function get(string $section, string $variable = null)
     {
         $sectionElement = $this->getSection($section);
 
-        if ($variable === NULL)
+        if ($variable === null)
         {
             return $sectionElement;
         }

@@ -29,21 +29,21 @@ class IniConfig extends BaseConfig
                 $currentElement = &$currentElement[$section];
             }
 
-            $currentElement = empty($value) ? NULL : $value;
+            $currentElement = empty($value) ? null : $value;
 
             unset($currentElement);
         }
 
-        // replace empty values for NULL
+        // replace empty values for null
         array_walk_recursive($splitConfig, function(&$value, $key){
-            $value = empty($value) ? NULL : $value;
+            $value = empty($value) ? null : $value;
         });
 
         $this->config = $splitConfig;
     }
 
 
-    public function get(string $section, string $variable = NULL)
+    public function get(string $section, string $variable = null)
     {
         $nestedSection = $section . '.' . $variable;
 

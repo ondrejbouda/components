@@ -13,7 +13,7 @@ class Logger extends Bouda\Object
     }
 
     // mlog:)
-    public static function log($whatever = NULL)
+    public static function log($whatever = null)
     {
         if (isset(self::$logFile) && $fw = fopen(self::$logFile, 'a'))
         {
@@ -23,7 +23,7 @@ class Logger extends Bouda\Object
 
             echo @$stack[1]['class'] . '::' . @$stack[1]['function'] . ' ';
             
-            if ($whatever !== NULL)
+            if ($whatever !== null)
             {
                 print_r ($whatever);
             }
