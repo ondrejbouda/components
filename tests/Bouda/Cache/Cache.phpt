@@ -2,10 +2,10 @@
 
 namespace Bouda\CacheTests;
 
-use Tester\Assert,
-    Tester\TestCase,
-    Tester\FileMock,
-    Bouda\Cache\CacheImpl;
+use Tester\Assert;
+use Tester\TestCase;
+use Tester\FileMock;
+use Bouda\Cache\CacheImpl;
 
 require_once __DIR__ . '/../../bootstrap.php';
 

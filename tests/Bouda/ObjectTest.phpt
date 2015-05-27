@@ -2,9 +2,9 @@
 
 namespace BoudaTests;
 
-use Tester\Assert,
-    Tester\TestCase,
-    Bouda\Object;
+use Tester\Assert;
+use Tester\TestCase;
+use Bouda\Object;
 
 require_once __DIR__ . '/../bootstrap.php';
 

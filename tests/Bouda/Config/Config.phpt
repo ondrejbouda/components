@@ -2,11 +2,11 @@
 
 namespace Bouda\ConfigTests;
 
-use Tester\Assert,
-    Tester\TestCase,
-    Bouda\Config\IniConfig,
-    Bouda\Config\NeonConfig,
-    Bouda\Config\NeonDecoderImpl;
+use Tester\Assert;
+use Tester\TestCase;
+use Bouda\Config\IniConfig;
+use Bouda\Config\NeonConfig;
+use Bouda\Config\NeonDecoderImpl;
 
 require_once __DIR__ . '/../../bootstrap.php';
 

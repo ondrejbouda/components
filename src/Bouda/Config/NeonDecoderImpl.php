@@ -2,8 +2,8 @@
 
 namespace Bouda\Config;
 
-use Bouda,
-    Nette\Neon\Neon;
+use Bouda;
+use Nette\Neon\Neon;
 
 
 class NeonDecoderImpl extends Bouda\Object implements NeonDecoder

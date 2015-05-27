@@ -2,10 +2,10 @@
 
 namespace Bouda\DITests;
 
-use Tester\Assert,
-    Tester\TestCase,
-    Nette\Neon\Decoder,
-    Bouda\DI\ServiceDefinition;
+use Tester\Assert;
+use Tester\TestCase;
+use Nette\Neon\Decoder;
+use Bouda\DI\ServiceDefinition;
 
 require_once __DIR__ . '/../../bootstrap.php';
 

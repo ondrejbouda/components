@@ -2,8 +2,8 @@
 
 namespace Bouda\Cache;
 
-use Bouda,
-    Bouda\Logger;
+use Bouda;
+use Bouda\Logger;
 
 
 class CacheImpl extends Bouda\Object implements Cache 

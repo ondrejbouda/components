@@ -2,12 +2,12 @@
 
 namespace Bouda\DITests;
 
-use Tester\Assert,
-    Tester\TestCase,
-    Bouda\Config\Config,
-    Bouda\DI\Container,
-    Bouda\DI\ServiceFactory,
-    Bouda\DI\ServiceDefinition;
+use Tester\Assert;
+use Tester\TestCase;
+use Bouda\Config\Config;
+use Bouda\DI\Container;
+use Bouda\DI\ServiceFactory;
+use Bouda\DI\ServiceDefinition;
 
 require_once __DIR__ . '/../../bootstrap.php';
 

@@ -2,8 +2,8 @@
 
 namespace Bouda\DI;
 
-use Bouda,
-    Bouda\Config\Config;
+use Bouda;
+use Bouda\Config\Config;
 
 
 class ConfigServiceFactory extends Bouda\Object implements ServiceFactory
